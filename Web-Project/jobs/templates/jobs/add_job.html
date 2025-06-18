@@ -1,0 +1,56 @@
+<html>
+    <head>
+        {% load static %}
+        <title>Add Job</title>
+        <link rel="stylesheet"  href="{% static 'Add.css' %}">
+    </head>
+    <body>
+        {% block content %}
+        <div class ="topnav">
+            <a  href="{% url 'home2' %}">Home</a>
+            <a class="active" href="{% url 'add_job' %}">Add job</a>
+            <a href="{% url 'job_list' %}">Company Jobs</a>
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+               <button type="submit" >
+                    Logout
+              </button>
+            </form>
+           {% else %}
+            <a id="login-register-link" href="{% url 'login' %}">Login / Register</a>
+           {% endif %}
+           </div>
+    <br>
+    <br>
+        <form class="form" method="post" >
+            {% csrf_token %}
+            <div>
+                <h1>Add Job</h1>
+            </div>
+            <div>
+                <input id="id" type="number" placeholder="Enter Job ID" required name="job_id">
+            </div>
+            <div>
+                <input id="tit" type="text" placeholder="Enter Job Title" required name="title">
+            </div>
+            <div>
+                <input id="num" type="number" placeholder="Enter Salary" required name="salary">
+            </div>
+            <div>
+                <input id="name" type="text" placeholder="Enter Company Name" required name="company">
+            </div>
+            <div>
+                <select name="status" id="stat" required>
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="open">Opened</option>
+                    <option value="closed">Closed</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        {% endblock %}
+    </body>
+</html>

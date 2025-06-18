@@ -1,0 +1,24 @@
+{% extends "jobs/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="job-listings">
+    <div class="job-titles" id="jobListContainer">
+        {% for job in jobs %}
+        <div class="job-item" data-job-id="{{ job.job_id }}">
+            <div class="job-title">{{ job.title }}</div>
+            <div class="job-company">{{ job.company }}</div>
+            <div class="job-meta">${{ job.salary }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="job-details" id="jobDetailContainer">
+        <p>Select a job to view details</p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'jobs/js/search.job.js' %}"></script>
+{% endblock %}
